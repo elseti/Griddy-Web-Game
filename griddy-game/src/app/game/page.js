@@ -11,6 +11,6 @@ export default function GriddyGameHome(props){
     
     console.log(level);
     return(
-        <GriddyGame gridNo={4} greenSquareNo={3}/>
+        <GriddyGame gridNo={3} greenSquareNo={3}/>
     );
 }

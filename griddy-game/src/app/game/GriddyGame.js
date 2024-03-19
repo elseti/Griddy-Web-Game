@@ -6,21 +6,55 @@ import { createGridArray } from "@/utils/GameLogic";
 import Home from "@/app/page";
 
 export default function GriddyGame(props){
+    const timerDuration = 5;
+
     const [answerArray, setAnswerArray] = useState([]);
     const [inputArray, setInputArray] = useState([]);
-    const [isTimerDone, setTimerDone] = useState(false);
-    const [timerValue, setTimerValue] = useState(5);
+    const [isTimerDone, setIsTimerDone] = useState(false);
+    const [timerValue, setTimerValue] = useState(timerDuration);
+    const [currentLevel, setCurrentLevel] = useState(1);
 
-    const gridNo = props.gridNo;
-    const greenSquareNo = props.greenSquareNo;
-    const divGridStyle = `grid grid-cols-${gridNo} gap-6`
+    let gridNo = props.gridNo;
+    let greenSquareNo = props.greenSquareNo;
+    let divGridStyle = `grid grid-cols-${gridNo} gap-6`
 
     const router = useRouter();
 
     // create answer grid
     useEffect(() => {
+        switch(currentLevel){
+            case(1):
+                console.log('in 1');
+               
+                gridNo = 3;
+                greenSquareNo = 3;
+                divGridStyle = `grid grid-cols-3 gap-6`;
+                setIsTimerDone(false);
+                setTimerValue(timerDuration);
+                break;
+
+            case(2):
+                console.log('helo');
+                gridNo = 3;
+                greenSquareNo = 4;
+                divGridStyle = `grid grid-cols-${gridNo} gap-6`;
+                setIsTimerDone(false);
+                setTimerValue(timerDuration);
+                break;
+            
+            default:
+                console.log('default');
+                gridNo = 3;
+                greenSquareNo = 3;
+                divGridStyle = `grid grid-cols-${gridNo} gap-6`;
+                setIsTimerDone(false);
+                setTimerValue(timerDuration);
+                break;
+        }
+
         createGrid(gridNo, greenSquareNo);
-    }, []);
+
+    }, [currentLevel]);
 
     // timer countdown
     useEffect(() => {
@@ -31,18 +65,22 @@ export default function GriddyGame(props){
             return () => clearInterval(interval);
         }
         if(timerValue === 0){
-            setTimerDone(true);
+            setIsTimerDone(true);
             setTimerValue("Press the submit after clicking the correct boxes.");
         }
     }, [timerValue]);
 
 
     // creates answerArray
-    const createGrid = async() => {
+    const createGrid = async(gridNo, greenSquareNo) => {
+        console.log('in creategrid');
+
         let answer = createGridArray(gridNo, greenSquareNo);
         let input = Array(answer.length).fill(0);
-        await setAnswerArray(answer);
-        await setInputArray(input);
+        setAnswerArray(answer);
+        setInputArray(input);
+
+        console.log(answer);
     };
 
     // adds to inputArray
@@ -69,19 +107,38 @@ export default function GriddyGame(props){
         for(let i = 0; i < inputArray.length; i++){
             if(inputArray[i] !== answerArray[i]){
                 console.log("wrong");
-                return false
+                gameOver();
+                return; // not needed?
             }
         }
         console.log("right");
-        router.push('/rfr');
-        // window.location.reload(false);
-        return true;    
+        nextLevel();
     }
 
+    // called when answer is right; progress to next level
+    const nextLevel = async() => {
+        setCurrentLevel(prevLevel => prevLevel + 1);
+        console.log("Proceed to level " + currentLevel + typeof currentLevel);
+    };
+
+    // const resetLevel = async() => {
+    //     setTimerValue(timerDuration);
+    //     createGrid(gridNo, greenSquareNo);
+    //     divGridStyle = `grid grid-cols-${gridNo} gap-6`;
+    // }
+
+    // called when answer is wrong; game over
+    const gameOver = async() => {
+        console.log("Game over!");
+        router.push("/");
+    };
 
     return (
         <>
             <div className="flex flex-col justify-center bg-emerald-100 text-black items-center h-screen">
+                <div className="text-3xl p-10">
+                    <p>Level {currentLevel}</p>
+                </div>
                 <div className="text-3xl p-10">
                     <p>{timerValue}</p>
                 </div>
@@ -124,16 +181,13 @@ export default function GriddyGame(props){
                         )}
                     </div>
                 </div>
-                {/* <button onClick={() => router.prefetch('/')} className="bg-teal-400 hover:bg-teal-500 text-black py-5 px-20 mt-10 text-3xl rounded-xl">
-                        Submit
-                    </button> */}
+
                 {isTimerDone &&
                     <button onClick={() => checkAnswer()} className="bg-teal-400 hover:bg-teal-500 text-black py-5 px-20 mt-10 text-3xl rounded-xl">
                         Submit
                     </button>
                 }
 
-                
             </div>
         </>
     );
