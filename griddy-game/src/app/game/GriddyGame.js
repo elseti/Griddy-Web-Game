@@ -1,7 +1,9 @@
 'use client'
 
 import { useEffect, useState } from "react";
+import { useRouter } from 'next/navigation';
 import { createGridArray } from "@/utils/GameLogic";
+import Home from "@/app/page";
 
 export default function GriddyGame(props){
     const [answerArray, setAnswerArray] = useState([]);
@@ -12,6 +14,8 @@ export default function GriddyGame(props){
     const gridNo = props.gridNo;
     const greenSquareNo = props.greenSquareNo;
     const divGridStyle = `grid grid-cols-${gridNo} gap-6`
+
+    const router = useRouter();
 
     // create answer grid
     useEffect(() => {
@@ -28,6 +32,7 @@ export default function GriddyGame(props){
         }
         if(timerValue === 0){
             setTimerDone(true);
+            setTimerValue("Press the submit after clicking the correct boxes.");
         }
     }, [timerValue]);
 
@@ -68,13 +73,15 @@ export default function GriddyGame(props){
             }
         }
         console.log("right");
-        return true;
+        router.push('/rfr');
+        // window.location.reload(false);
+        return true;    
     }
 
 
     return (
         <>
-            <div className="flex flex-col justify-center bg-teal-200 text-black items-center h-screen">
+            <div className="flex flex-col justify-center bg-emerald-100 text-black items-center h-screen">
                 <div className="text-3xl p-10">
                     <p>{timerValue}</p>
                 </div>
@@ -117,10 +124,16 @@ export default function GriddyGame(props){
                         )}
                     </div>
                 </div>
+                {/* <button onClick={() => router.prefetch('/')} className="bg-teal-400 hover:bg-teal-500 text-black py-5 px-20 mt-10 text-3xl rounded-xl">
+                        Submit
+                    </button> */}
+                {isTimerDone &&
+                    <button onClick={() => checkAnswer()} className="bg-teal-400 hover:bg-teal-500 text-black py-5 px-20 mt-10 text-3xl rounded-xl">
+                        Submit
+                    </button>
+                }
+
                 
-                <button onClick={() => checkAnswer()} className="bg-teal-400 hover:bg-teal-500 text-black py-5 px-20 mt-10 text-3xl rounded-xl">
-                    Submit
-                </button>
             </div>
         </>
     );
