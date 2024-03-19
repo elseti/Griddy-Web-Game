@@ -8,9 +8,15 @@ export function createGridArray(gridNo, greenSquareNo){
         return null;
     }
     for(let i = 0; i < greenSquareNo; i++){
-        let randomNum =  Math.floor(Math.random() * arrayLength);
-        randomGreenSquares.push(randomNum);
-        // console.log(randomNum);
+        // check so that there are no duplicates
+        while(true){
+            let randomNum = Math.floor(Math.random() * arrayLength);
+            if(!randomGreenSquares.includes(randomNum)){
+                randomGreenSquares.push(randomNum);
+                break;
+            }
+        }
+        
     }
     console.log(randomGreenSquares);
     for(let i = 0; i < greenSquareNo; i++){
