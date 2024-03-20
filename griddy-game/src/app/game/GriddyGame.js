@@ -2,8 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation';
-import { createGridArray } from "@/utils/GameLogic";
-import Home from "@/app/page";
+import { createGridArray, switchCurrentLevel } from "@/utils/GameLogic";
 
 export default function GriddyGame(props){
     const timerDuration = 5;
@@ -13,47 +12,22 @@ export default function GriddyGame(props){
     const [isTimerDone, setIsTimerDone] = useState(false);
     const [timerValue, setTimerValue] = useState(timerDuration);
     const [currentLevel, setCurrentLevel] = useState(1);
+    const [divGridStyle, setDivGridStyle] = useState("grid grid-cols-3 gap-6");
 
     let gridNo = props.gridNo;
     let greenSquareNo = props.greenSquareNo;
-    let divGridStyle = `grid grid-cols-${gridNo} gap-6`
 
     const router = useRouter();
 
-    // create answer grid
+    // create answer grid based on current level
     useEffect(() => {
-        switch(currentLevel){
-            case(1):
-                console.log('in 1');
-               
-                gridNo = 3;
-                greenSquareNo = 3;
-                divGridStyle = `grid grid-cols-3 gap-6`;
-                setIsTimerDone(false);
-                setTimerValue(timerDuration);
-                break;
-
-            case(2):
-                console.log('helo');
-                gridNo = 3;
-                greenSquareNo = 4;
-                divGridStyle = `grid grid-cols-${gridNo} gap-6`;
-                setIsTimerDone(false);
-                setTimerValue(timerDuration);
-                break;
-            
-            default:
-                console.log('default');
-                gridNo = 3;
-                greenSquareNo = 3;
-                divGridStyle = `grid grid-cols-${gridNo} gap-6`;
-                setIsTimerDone(false);
-                setTimerValue(timerDuration);
-                break;
-        }
-
+        gridNo = switchCurrentLevel(currentLevel)[0];
+        greenSquareNo = switchCurrentLevel(currentLevel)[1];
+        setDivGridStyle(switchCurrentLevel(currentLevel)[2]);
+        console.log(gridNo, greenSquareNo, divGridStyle);
+        setIsTimerDone(false);
+        setTimerValue(timerDuration);
         createGrid(gridNo, greenSquareNo);
-
     }, [currentLevel]);
 
     // timer countdown
@@ -66,15 +40,13 @@ export default function GriddyGame(props){
         }
         if(timerValue === 0){
             setIsTimerDone(true);
-            setTimerValue("Press the submit after clicking the correct boxes.");
+            setTimerValue("Press the submit button after clicking the correct boxes.");
         }
     }, [timerValue]);
 
 
     // creates answerArray
     const createGrid = async(gridNo, greenSquareNo) => {
-        console.log('in creategrid');
-
         let answer = createGridArray(gridNo, greenSquareNo);
         let input = Array(answer.length).fill(0);
         setAnswerArray(answer);
@@ -88,7 +60,6 @@ export default function GriddyGame(props){
         let newInputArray = [...inputArray];
         newInputArray[gridIndex] = 1;
         await setInputArray(newInputArray);
-        console.log(inputArray)
     };
 
     // delete in input array
@@ -96,7 +67,6 @@ export default function GriddyGame(props){
         let newInputArray = [...inputArray];
         newInputArray[gridIndex] = 0;
         await setInputArray(newInputArray);
-        console.log(inputArray)
     }
 
     // check answer
@@ -111,7 +81,6 @@ export default function GriddyGame(props){
                 return; // not needed?
             }
         }
-        console.log("right");
         nextLevel();
     }
 
@@ -120,12 +89,6 @@ export default function GriddyGame(props){
         setCurrentLevel(prevLevel => prevLevel + 1);
         console.log("Proceed to level " + currentLevel + typeof currentLevel);
     };
-
-    // const resetLevel = async() => {
-    //     setTimerValue(timerDuration);
-    //     createGrid(gridNo, greenSquareNo);
-    //     divGridStyle = `grid grid-cols-${gridNo} gap-6`;
-    // }
 
     // called when answer is wrong; game over
     const gameOver = async() => {

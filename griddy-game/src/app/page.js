@@ -12,9 +12,9 @@ export default function Home(){
         <p className="md:p-0 text-9xl font-bold p-4 mb-4 mx-auto text-center justify-between">
                 Welcome!
         </p>
-        <button onClick={()=> router.push(`/game?level=1`)}>
+        <button onClick={()=> router.push("/game")}>
           <p className="bg-teal-600 hover:bg-teal-400 rounded-xl text-3xl text-white px-10 py-5 mt-10">
-              Click to continue
+              Start Game!
           </p>
         </button>	
       </div>

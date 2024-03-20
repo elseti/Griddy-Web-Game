@@ -25,3 +25,91 @@ export function createGridArray(gridNo, greenSquareNo){
     console.log(gridArray);
     return gridArray;
 }
+
+// return gridNo, greenSquareNo, and divGridStyle based on current level
+export function switchCurrentLevel(currentLevel){
+    let gridNo = 0;
+    let greenSquareNo = 0;
+    let divGridStyle = "";
+
+    switch(currentLevel){
+        case(1):
+            console.log('in level 1');
+            gridNo = 3;
+            greenSquareNo = 3;
+            divGridStyle = `grid grid-cols-3 gap-6`;
+            break;
+
+        case(2):
+            console.log('in level 2');
+            gridNo = 3;
+            greenSquareNo = 4;
+            divGridStyle = `grid grid-cols-3 gap-6`;
+            break;
+        
+        case(3):
+            console.log('in level 3');
+            gridNo = 4;
+            greenSquareNo = 4;
+            divGridStyle = `grid grid-cols-4 gap-6`;
+            break;
+
+        case(4):
+            console.log('in level 4');
+            gridNo = 4;
+            greenSquareNo = 5;
+            divGridStyle = `grid grid-cols-4 gap-6`;
+            break;
+
+        case(5):
+            console.log('in level 5');
+            gridNo = 4;
+            greenSquareNo = 6;
+            divGridStyle = `grid grid-cols-4 gap-6`;
+            break;
+
+        case(6):
+            console.log('in level 6');
+            gridNo = 5;
+            greenSquareNo = 5;
+            divGridStyle = `grid grid-cols-5 gap-6`;
+            break;
+
+        case(7):
+            console.log('in level 7');
+            gridNo = 5;
+            greenSquareNo = 6;
+            divGridStyle = `grid grid-cols-5 gap-6`;
+            break;
+
+        case(8):
+            console.log('in level 8');
+            gridNo = 5;
+            greenSquareNo = 7;
+            divGridStyle = `grid grid-cols-5 gap-6`;
+            break;
+        
+        case(9):
+            console.log('in level 9');
+            gridNo = 6;
+            greenSquareNo = 6;
+            divGridStyle = `grid grid-cols-$6 gap-6`;
+            break;
+
+        case(10):
+            console.log('in level 10');
+            gridNo = 7;
+            greenSquareNo = 7;
+            divGridStyle = `grid grid-cols-7 gap-6`;
+            break;
+
+        default:
+            console.error("ERROR: Corresponding level " + currentLevel + " not defined!");
+            gridNo = 7;
+            greenSquareNo = 3;
+            divGridStyle = `grid grid-cols-${gridNo} gap-6`;
+            break;
+    }
+
+    return [gridNo, greenSquareNo, divGridStyle];
+}
