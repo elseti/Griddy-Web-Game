@@ -93,7 +93,7 @@ export function switchCurrentLevel(currentLevel){
             console.log('in level 9');
             gridNo = 6;
             greenSquareNo = 6;
-            divGridStyle = `grid grid-cols-$6 gap-6`;
+            divGridStyle = `grid grid-cols-6 gap-6`;
             break;
 
         case(10):

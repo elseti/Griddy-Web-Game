@@ -98,25 +98,27 @@ export default function GriddyGame(props){
 
     return (
         <>
-            <div className="flex flex-col justify-center bg-emerald-100 text-black items-center h-screen">
-                <div className="text-3xl p-10">
+            <div className="flex flex-col bg-gradient-to-b from-sky-400 to-cyan-100 text-black items-center h-full p-32">
+                {/* <div className="bg-gradient-to-b from-orange-100 to-orange-400 rounded-3xl px-14 py-7 text-5xl font-bold p-10"> */}
+                <div className="bg-orange-200 rounded-3xl px-14 py-7 text-5xl font-bold p-10">
                     <p>Level {currentLevel}</p>
                 </div>
-                <div className="text-3xl p-10">
+                {/* <div className="bg-orange-200 text-3xl justify-center text-center px-10 py-5 rounded-full"> */}
+                <div className="text-3xl justify-center text-center p-10"> 
                     <p>{timerValue}</p>
                 </div>
-                <div className="bg-slate-500 p-10 rounded-xl">
+                <div className="bg-gray-500 p-16 rounded-xl shadow-xl m-10">
                     <div className={divGridStyle}>
                         {!isTimerDone ? (
                             answerArray !== null ? (
                                 answerArray.map((box, index) => (
                                     box === 1 ? (
                                         <div key={index}>
-                                            <div className="bg-green-500 p-10"/>
+                                            <div className="bg-green-500 p-16 shadow-l"/>
                                         </div>
                                     ) : (
                                         <div key={index}>
-                                            <div className="bg-gray-200 p-10"/>
+                                            <div className="bg-gray-200 p-16 p-10"/>
                                         </div>
                                     )
                                 ))
@@ -129,9 +131,15 @@ export default function GriddyGame(props){
                             inputArray !== null ? (
                                 inputArray.map((box, index) => (
                                     box === 1 ? (
-                                        <button key={index} onClick={() => deleteInInputArray(index)} className="bg-green-500 hover:bg-green-600 p-10"/>
+                                        <button key={index} 
+                                            onClick={() => deleteInInputArray(index)}
+                                            className="bg-green-500 hover:bg-green-600 shadow-l p-16"
+                                        />
                                     ) : (
-                                        <button key={index} onClick={() => addToInputArray(index)} className="bg-gray-200 hover:bg-gray-300 p-10"/>
+                                        <button key={index} 
+                                            onClick={() => addToInputArray(index)} 
+                                            className="bg-gray-200 hover:bg-gray-300 shadow-l p-16"
+                                        />
                                     )
                                 ))
                             ) : (
@@ -146,7 +154,7 @@ export default function GriddyGame(props){
                 </div>
 
                 {isTimerDone &&
-                    <button onClick={() => checkAnswer()} className="bg-teal-400 hover:bg-teal-500 text-black py-5 px-20 mt-10 text-3xl rounded-xl">
+                    <button onClick={() => checkAnswer()} className="bg-orange-400 hover:bg-orange-500 font-bold text-black py-5 px-20 mt-10 text-3xl rounded-full">
                         Submit
                     </button>
                 }
