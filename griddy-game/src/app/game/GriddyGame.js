@@ -12,11 +12,13 @@ export default function GriddyGame(props){
     const [inputArray, setInputArray] = useState([]);
     const [isTimerDone, setIsTimerDone] = useState(false);
     const [timerValue, setTimerValue] = useState(timerDuration);
-    const [currentLevel, setCurrentLevel] = useState(1);
-    const [divGridStyle, setDivGridStyle] = useState(null);
+    const [currentLevel, setCurrentLevel] = useState(7);
+   
 
     let gridNo = props.gridNo;
     let greenSquareNo = props.greenSquareNo;
+
+    const [divGridStyle, setDivGridStyle] = useState(null);
     // let divGridStyle = `grid grid-cols-${gridNo} gap-6`;
 
     const router = useRouter();
@@ -48,18 +50,15 @@ export default function GriddyGame(props){
 
     // create answer grid based on current level
     useEffect(() => {
-        let setupArray = switchCurrentLevel(currentLevel);
-        gridNo = setupArray[0];
-        greenSquareNo = setupArray[1];
-        setDivGridStyle(setupArray[2]);
-        // gridNo = switchCurrentLevel(currentLevel)[0];
-        // greenSquareNo = switchCurrentLevel(currentLevel)[1];
-        createGrid(gridNo, greenSquareNo);
+       
+        gridNo = switchCurrentLevel(currentLevel)[0];
+        greenSquareNo = switchCurrentLevel(currentLevel)[1];
+        setDivGridStyle(switchCurrentLevel(currentLevel)[2]);
+        console.log(gridNo, greenSquareNo, divGridStyle);
         setIsTimerDone(false);
         setTimerValue(timerDuration);
+        createGrid(gridNo, greenSquareNo);
         
-        // setDivGridStyle(switchCurrentLevel(currentLevel)[2]);
-        // divGridStyle = switchCurrentLevel(currentLevel)[2];
         console.log(gridNo, greenSquareNo, divGridStyle);
         
     }, [currentLevel]);
@@ -82,7 +81,7 @@ export default function GriddyGame(props){
 
     // creates answerArray
     const createGrid = async(gridNo, greenSquareNo) => {
-        console.log(gridNo, greenSquareNo);
+        // console.log(gridNo, greenSquareNo);
         let answer = createGridArray(gridNo, greenSquareNo);
         let input = Array(answer.length).fill(0);
         setAnswerArray(answer);
@@ -117,6 +116,7 @@ export default function GriddyGame(props){
                 playWrongAudio();
                 console.log("wrong");
                 gameOver();
+                return;
             }
         }
         playCorrectAudio();
@@ -150,7 +150,7 @@ export default function GriddyGame(props){
                 </div>
                 <div className="bg-gray-500 p-16 rounded-xl shadow-xl m-10">
                     <div className={divGridStyle}>
-                        <p>{divGridStyle}</p>
+                        {/* <p>{divGridStyle}</p> */}
                         {!isTimerDone ? (
                             answerArray !== null ? (
                                 answerArray.map((box, index) => (
