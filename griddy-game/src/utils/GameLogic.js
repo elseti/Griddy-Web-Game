@@ -51,7 +51,7 @@ export function switchCurrentLevel(currentLevel){
             console.log('in level 3');
             gridNo = 4;
             greenSquareNo = 4;
-            divGridStyle = `grid grid-cols-4 gap-6`;
+            divGridStyle = "grid grid-cols-4 gap-6";
             break;
 
         case(4):
@@ -111,5 +111,6 @@ export function switchCurrentLevel(currentLevel){
             break;
     }
 
+    console.log(divGridStyle);
     return [gridNo, greenSquareNo, divGridStyle];
 }
