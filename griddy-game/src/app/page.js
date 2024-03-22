@@ -82,7 +82,7 @@ export default function Home(){
             Warm up... and click this button once you are ready!
           </p>
           <button onClick={()=> startClicked()}>
-            <p className="animate-bounce transition ease-in-out delay-10 bg-orange-400 hover:bg-orange-500 hover:-translate-y-1 hover:scale-110 duration-300 rounded-xl text-3xl text-white px-10 py-5 mt-10">
+            <p className="animate-bounce transition ease-in-out delay-10 bg-orange-400 hover:bg-orange-500 hover:scale-110 duration-300 rounded-xl text-3xl text-white px-10 py-5 mt-10">
                 Start Game!
             </p>
           </button>	
