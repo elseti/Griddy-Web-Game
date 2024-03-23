@@ -14,6 +14,8 @@ export default function GriddyGrid(props){
 
     const inputArray = props.inputArray;
 
+    const currentLevel = props.currentLevel;
+
     const addParentInputArray = (index) => {
         props.addToInputArray(index);
     }
@@ -26,20 +28,18 @@ export default function GriddyGrid(props){
     useEffect(() => {
         setTimerValue(TIMER_DURATION);
         setIsTimerDone(false);
+        console.log(currentLevel);
     }, [answerArray]);
 
     // timer countdown
     useEffect(() => {
         if(timerValue > 0){
             const interval = setInterval(() => {
-                console.log("timer is "  + timerValue);
                 setTimerValue(prevTimerValue => prevTimerValue - 1);
-                
             }, 1000);
             return () => clearInterval(interval);
         }
         if(timerValue === 0){
-            console.log("timer is 0");
             setIsTimerDone(true);
         }
     }, [timerValue]);
@@ -52,11 +52,11 @@ export default function GriddyGrid(props){
                     answerArray.map((box, index) => (
                         box === 1 ? (
                             <div key={index}>
-                                <div className="bg-green-500 border-slate-600 border-2 shadow-l lg:p-12 p-5"/>
+                                <div className={`${currentLevel!==10 && currentLevel!==9 && "lg:p-12"} ${currentLevel===10 && "p-7"} ${currentLevel===9 && "p-9"} bg-green-500 border-slate-600 border-2 shadow-l p-5`}/>
                             </div>
                         ) : (
                             <div key={index}>
-                                <div className="bg-gray-200 border-slate-600 border-2 lg:p-12 p-5"/>
+                                <div className={`${currentLevel!==10 && currentLevel!==9 && "lg:p-12"} ${currentLevel===10 && "p-7"} ${currentLevel===9 && "p-9"} bg-slate-200 border-slate-600 border-2 shadow-l p-5`}/>
                             </div>
                         )
                     ))
@@ -71,21 +71,19 @@ export default function GriddyGrid(props){
                         box === 1 ? (
                             <button key={index} 
                                 onClick={() => deleteParentInputArray(index)}
-                                className="bg-green-500 hover:bg-green-600 border-slate-600 border-2 border-xl shadow-l lg:p-12 p-5"
+                                className={`${currentLevel!==10 && currentLevel!==9 && "lg:p-12"} ${currentLevel===10 && "p-7"} ${currentLevel===9 && "p-9"} bg-green-500 hover:bg-green-600 border-slate-600 border-2 shadow-l p-5`}
                             />
                         ) : (
                             <button key={index} 
                                 onClick={() => addParentInputArray(index)} 
-                                className="bg-gray-200 hover:bg-gray-300 border-slate-600 border-2 shadow-l lg:p-12 p-5"
+                                className={`${currentLevel!==10 && currentLevel!==9 && "lg:p-12"} ${currentLevel===10 && "p-7"} ${currentLevel===9 && "p-9"} bg-gray-200 hover:bg-gray-300 border-slate-600 border-2 shadow-l p-5`}
                             />
                         )
                     ))
                 ) : (
-                    <>
                     <div className="flex flex-col justify-center bg-teal-200 text-black items-center h-screen">
                         <p>Loading...</p>
                     </div>
-                    </>
                 )
             )}
         </>

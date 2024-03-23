@@ -8,7 +8,8 @@ import { getLocalHighScore, setSessionIsMusicPlaying, getSessionIsMusicPlaying }
 export default function Home(){
   const [showWelcome, setShowWelcome] = useState(false);
   const [highScore, setHighScore] = useState("-");
-  // const [isMusicPlaying, setIsMusicPlaying] = useState(false);
+
+  const router = useRouter();
 
   const [playBgm] = useSound(
 		'audio/positivePuzzler.mp3',
@@ -23,7 +24,6 @@ export default function Home(){
   useEffect(() => {
     setShowWelcome(true);
     let localHighScore = getLocalHighScore();
-    console.log(localHighScore)
     setHighScore(localHighScore);
   }, []);
 
@@ -37,21 +37,18 @@ export default function Home(){
     router.push("/game");
   };
 
-  const router = useRouter();
-
   return (
       <div className="flex flex-col justify-center items-center p-20 bg-gradient-to-b from-cyan-500 to-teal-200 text-black items-center h-full">
-        <p className={`${showWelcome ? "opacity-100" : "opacity-0"} transition-opacity ease-in delay-100 duration-1000 md:p-0 text-5xl font-bold p-4 m-10 mx-auto text-center justify-between`}>
+        <p className={`${showWelcome ? "opacity-100" : "opacity-0"} transition-opacity ease-in delay-100 duration-1000 text-slate-900 md:p-0 text-5xl font-bold p-4 m-10 mx-auto text-center justify-between`}>
             Welcome to Griddy Game!
         </p>
-        <p className={`${showWelcome ? "opacity-80" : "opacity-0"} bg-orange-200 w-1/5 transition-opacity ease-in delay-100 duration-1000 text-xl p-4 text-center justify-between rounded-2xl`}>
+        <p className={`${showWelcome ? "opacity-80" : "opacity-0"} bg-orange-200 w-1/4 transition-opacity ease-in delay-100 text-slate-900 duration-1000 text-xl p-4 text-center justify-between rounded-2xl`}>
             Your highest level: <b>{highScore}</b>
         </p>
         <div className={`${showWelcome ? "opacity-60" : "opacity-0"} w-3/5 shadow-xl transition-opacity ease-in delay-700 duration-1000 flex flex-col justify-center bg-blue-100 p-10 rounded-xl m-10`}>
           <p className="md:p-0 text-2xl font-bold p-10 mb-7 mx-auto text-center justify-between">
               How to Play
           </p>
-          {/* <p className={`${showWelcome ? "opacity-100" : "opacity-0"} transition-opacity ease-in delay-200 duration-1000 md:p-0 text-xl font-bold p-4 mb-4 mx-auto text-center justify-between`}> */}
           <div className="p-5">
             <p className={`md:p-0 text-xl font-bold p-4 mb-4 mx-auto text-center justify-between`}>
               1. Memorize Green Squares
@@ -95,7 +92,7 @@ export default function Home(){
             Warm up... and click this button once you are ready!
           </p>
           <button onClick={()=> startClicked()}>
-            <p className="animate-bounce transition ease-in-out delay-10 bg-orange-400 hover:bg-orange-500 hover:scale-110 duration-300 rounded-xl text-3xl text-white px-10 py-5 mt-10">
+            <p className="animate-bounce transition ease-in-out delay-10 bg-orange-400 hover:bg-orange-500 hover:scale-110 duration-300 rounded-xl text-3xl text-slate-900 px-10 py-5 mt-10">
                 Start Game!
             </p>
           </button>	
