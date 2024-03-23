@@ -14,6 +14,7 @@ export default function GriddyGame(){
     const [isTimerDone, setIsTimerDone] = useState(false);
     const [timerValue, setTimerValue] = useState(TIMER_DURATION);
     const [currentLevel, setCurrentLevel] = useState(1);
+    const [isGameOver, setIsGameOver] = useState(false);
 
     const router = useRouter();
 
@@ -42,7 +43,6 @@ export default function GriddyGame(){
 		{ volume: 0.25 }
 	);
 
-
     // create answer grid based on current level
     useEffect(() => {
         setIsTimerDone(false);
@@ -70,7 +70,6 @@ export default function GriddyGame(){
         }
     }, [timerValue]);
 
-    
     // creates answerArray
     const createGrid = async(gridNo, greenSquareNo) => {
         // console.log(gridNo, greenSquareNo);
@@ -121,12 +120,47 @@ export default function GriddyGame(){
     // called when answer is wrong; game over
     const gameOver = () => {
         console.log("Game over!");
-        router.push("/");
+        setIsGameOver(true);
     };
+
+    // called when retry button is clicked
+    const retryButtonClicked = () => {
+        setIsGameOver(false);
+        setCurrentLevel(1);
+    }
+
+    // called when home button is clicked
+    const homeButtonClicked = () => {
+        router.push("/");
+    }
 
 
     return (
         <>
+        {isGameOver ? (
+            <div className="flex flex-col bg-gradient-to-b from-sky-400 to-cyan-100 text-black justify-center items-center text-center h-screen p-32">
+                <div className="rounded-3xl px-14 py-7 text-8xl font-bold p-10">
+                    <p>Game Over!</p>
+                </div>
+                <p className="transition ease-in-out delay-10rounded-xl text-3xl text-black px-10 py-5 mt-10">
+                    Try again?
+                </p>
+                <div className="flex md:flex-row md:gap-20 flex-col gap-3 items-center p-10">
+                    <button onClick={()=> retryButtonClicked()}>
+                        <p className="transition ease-in-out delay-10 bg-orange-400 w-64 shadow-xl hover:bg-orange-500 hover:scale-110 duration-300 rounded-xl text-3xl text-black px-10 py-5 mt-10">
+                            Retry
+                        </p>
+                    </button>	
+                    <button onClick={()=> homeButtonClicked()}>
+                        <p className="transition ease-in-out delay-10 bg-orange-400 w-64 shadow-xl hover:bg-orange-500 hover:scale-110 duration-300 rounded-xl text-3xl text-black px-10 py-5 mt-10">
+                            Home
+                        </p>
+                    </button>	
+                </div>
+                
+            </div>
+        ) : (
+            
             <div className="flex flex-col bg-gradient-to-b from-sky-400 to-cyan-100 text-black items-center h-full p-32">
                 <div className="bg-orange-200 rounded-3xl px-14 py-7 text-5xl font-bold p-10">
                     <p>Level {currentLevel}</p>
@@ -178,6 +212,8 @@ export default function GriddyGame(){
                 }
 
             </div>
+        )}
+            
         </>
     );
     

@@ -1,9 +1,6 @@
 'use client'
 
 import { useEffect, useState } from "react";
-import { useRouter } from 'next/navigation';
-import { createGridArray, switchCurrentLevel } from "@/utils/GameLogic";
-import useSound from "use-sound";
 
 export default function GriddyGrid(props){
 
