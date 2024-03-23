@@ -39,7 +39,7 @@ export default function GriddyGrid(props){
             return () => clearInterval(interval);
         }
         if(timerValue === 0){
-            console.log('timer is 0');
+            console.log("timer is 0");
             setIsTimerDone(true);
         }
     }, [timerValue]);

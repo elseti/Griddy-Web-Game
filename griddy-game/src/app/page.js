@@ -24,7 +24,7 @@ export default function Home(){
     let localHighScore = getLocalHighScore();
     console.log(localHighScore)
     setHighScore(localHighScore);
-  });
+  }, []);
 
   const startClicked = () => {
     playBgm();
@@ -70,7 +70,7 @@ export default function Home(){
               3. Press Submit
             </p>
             <p className={`md:p-0 text-xl p-4 mb-4 mx-auto text-center justify-between`}>
-              If you press the correct buttons, you proceed to the next level. If you press the wrong button, it's game over.
+              If you press the correct buttons, you proceed to the next level. If you press the wrong button, it is game over.
             </p>
           </div>
 
