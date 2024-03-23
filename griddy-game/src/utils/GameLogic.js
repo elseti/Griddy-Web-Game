@@ -101,6 +101,7 @@ export function switchCurrentLevel(currentLevel){
     return [gridNo, greenSquareNo];
 }
 
+// set local storage for high score
 export function setLocalHighScore(highScore) {
     let prevHighScore = getLocalHighScore();
     if(prevHighScore!== "-" && highScore > prevHighScore){
@@ -108,7 +109,7 @@ export function setLocalHighScore(highScore) {
     }
 }
 
-// get Local Storage Profile
+// get local storage for High Score
 export function getLocalHighScore() {
 	try {
 		let data = JSON.parse(
@@ -117,5 +118,25 @@ export function getLocalHighScore() {
 		return data["highScore"] || "-";
 	} catch (error) {
 		return "-";
+	}
+}
+
+// set session storage for isMusicPlaying
+export function setSessionIsMusicPlaying(isMusicPlaying) {
+    sessionStorage.setItem(
+		"griddy-game",
+		JSON.stringify({"isMusicPlaying" : isMusicPlaying})
+	);
+}
+
+// get session storage for isMusicPlaying
+export function getSessionIsMusicPlaying() {
+    try {
+		let data = JSON.parse(
+			sessionStorage.getItem("griddy-game")
+		);
+		return data["isMusicPlaying"] || null;
+	} catch (error) {
+		console.log(error);
 	}
 }

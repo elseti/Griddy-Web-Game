@@ -153,13 +153,13 @@ export default function GriddyGame(){
         <>
         {isGameOver ? (
             <div className="flex flex-col bg-gradient-to-b from-sky-400 to-cyan-100 text-black justify-center items-center text-center h-screen p-32">
-                <div className="rounded-3xl px-14 py-7 text-8xl font-bold p-10">
+                <div className="rounded-3xl px-14 py-7 text-7xl font-bold p-10">
                     {endingTitle}
                 </div>
-                <p className="w-1/3 transition-opacity ease-in delay-100 duration-1000 text-2xl p-3 text-center justify-between rounded-2xl">
+                <p className="w-1/3 transition-opacity ease-in delay-100 duration-1000 text-xl p-3 text-center justify-between rounded-2xl">
                     Your current level: <b>{currentLevel - 1}</b>
                 </p>
-                <p className="w-1/3 transition-opacity ease-in delay-100 duration-1000 text-2xl p-3 text-center justify-between rounded-2xl">
+                <p className="w-1/3 transition-opacity ease-in delay-100 duration-1000 text-xl p-3 text-center justify-between rounded-2xl">
                     Your highest level: <b>{highScore}</b>
                 </p>
                 <p className="transition ease-in-out delay-10rounded-xl text-3xl text-black px-10 py-5 mt-10">
@@ -167,12 +167,12 @@ export default function GriddyGame(){
                 </p>
                 <div className="flex md:flex-row md:gap-20 flex-col gap-3 items-center p-10">
                     <button onClick={()=> retryButtonClicked()}>
-                        <p className="transition ease-in-out delay-10 bg-orange-400 w-64 shadow-xl hover:bg-orange-500 hover:scale-110 duration-300 rounded-xl text-3xl text-black px-10 py-5 mt-10">
+                        <p className="transition ease-in-out delay-10 bg-orange-400 w-52 shadow-xl hover:bg-orange-500 hover:scale-110 duration-300 rounded-xl text-2xl text-black py-4 mt-10">
                             Play Again
                         </p>
                     </button>	
                     <button onClick={()=> homeButtonClicked()}>
-                        <p className="transition ease-in-out delay-10 bg-orange-400 w-64 shadow-xl hover:bg-orange-500 hover:scale-110 duration-300 rounded-xl text-3xl text-black px-10 py-5 mt-10">
+                        <p className="transition ease-in-out delay-10 bg-orange-400 w-52 shadow-xl hover:bg-orange-500 hover:scale-110 duration-300 rounded-xl text-2xl text-black py-4 mt-10">
                             Home
                         </p>
                     </button>	
@@ -182,15 +182,16 @@ export default function GriddyGame(){
         ) : (
             
             <div className="flex flex-col bg-gradient-to-b from-sky-400 to-cyan-100 text-black items-center h-full p-32">
-                <div className="bg-orange-200 rounded-3xl px-14 py-7 text-5xl font-bold p-10">
+                <div className="bg-orange-200 rounded-xl px-14 text-3xl font-bold p-4 shadow-xl">
                     <p>Level {currentLevel}</p>
                 </div>
-                <div className="text-3xl justify-center text-center p-10"> 
+                <div className="text-2xl justify-center text-center mt-10 mb-3"> 
                     <p>{timerValue}</p>
                 </div>
+
                 {/* Display grid based on current level */}
                 { (currentLevel === 1 || currentLevel === 2) &&
-                    <div className="bg-gray-500 p-16 rounded-xl shadow-xl m-10">
+                    <div className="bg-gray-500 lg:p-16 p-6 rounded-xl shadow-xl mt-5 mb-10">
                         <div className="grid grid-cols-3 gap-6">
                             <GriddyGrid timerDuration={TIMER_DURATION} inputArray={inputArray} answerArray={answerArray} addToInputArray={addToInputArray} deleteInInputArray={deleteInInputArray}/>
                         </div>
@@ -225,12 +226,14 @@ export default function GriddyGame(){
                     </div>
                 }
 
-                {isTimerDone &&
-                    <button onClick={() => checkAnswer()} className="bg-orange-400 hover:bg-orange-500 font-bold text-black py-5 px-20 mt-10 text-3xl rounded-2xl">
+                {isTimerDone ? (
+                    <button onClick={() => checkAnswer()} className="bg-orange-400 hover:bg-orange-500 font-bold text-black py-4 px-10 mt-5 text-2xl rounded-2xl shadow-xl mb-30">
                         Submit
                     </button>
-                }
-
+                ) : (
+                    <div className="p-10"/>
+                )}
+                
             </div>
         )}
             

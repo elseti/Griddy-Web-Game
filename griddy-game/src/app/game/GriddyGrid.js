@@ -52,11 +52,11 @@ export default function GriddyGrid(props){
                     answerArray.map((box, index) => (
                         box === 1 ? (
                             <div key={index}>
-                                <div className="bg-green-500 p-16 border-slate-600 border-2 shadow-l"/>
+                                <div className="bg-green-500 border-slate-600 border-2 shadow-l lg:p-12 p-5"/>
                             </div>
                         ) : (
                             <div key={index}>
-                                <div className="bg-gray-200 border-slate-600 border-2 p-16 p-10"/>
+                                <div className="bg-gray-200 border-slate-600 border-2 lg:p-12 p-5"/>
                             </div>
                         )
                     ))
@@ -71,12 +71,12 @@ export default function GriddyGrid(props){
                         box === 1 ? (
                             <button key={index} 
                                 onClick={() => deleteParentInputArray(index)}
-                                className="bg-green-500 hover:bg-green-600 border-slate-600 border-2 border-xl shadow-l p-16"
+                                className="bg-green-500 hover:bg-green-600 border-slate-600 border-2 border-xl shadow-l lg:p-12 p-5"
                             />
                         ) : (
                             <button key={index} 
                                 onClick={() => addParentInputArray(index)} 
-                                className="bg-gray-200 hover:bg-gray-300 border-slate-600 border-2 shadow-l p-16"
+                                className="bg-gray-200 hover:bg-gray-300 border-slate-600 border-2 shadow-l lg:p-12 p-5"
                             />
                         )
                     ))
