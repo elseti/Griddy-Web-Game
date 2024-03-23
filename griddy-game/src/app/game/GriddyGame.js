@@ -75,7 +75,6 @@ export default function GriddyGame(){
 
     // creates answerArray
     const createGrid = async(gridNo, greenSquareNo) => {
-        // console.log(gridNo, greenSquareNo);
         let answer = createGridArray(gridNo, greenSquareNo);
         let input = Array(answer.length).fill(0);
         setAnswerArray(answer);
@@ -140,6 +139,7 @@ export default function GriddyGame(){
     // called when retry button is clicked
     const retryButtonClicked = () => {
         setIsGameOver(false);
+        setIsTimerDone(false);
         setCurrentLevel(1);
     }
 
