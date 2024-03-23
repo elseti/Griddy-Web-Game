@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation';
-import { createGridArray, switchCurrentLevel } from "@/utils/GameLogic";
+import { createGridArray, switchCurrentLevel, getLocalHighScore, setLocalHighScore } from "@/utils/GameLogic";
 import useSound from "use-sound";
 import GriddyGrid from "./GriddyGrid";
 
@@ -15,6 +15,10 @@ export default function GriddyGame(){
     const [timerValue, setTimerValue] = useState(TIMER_DURATION);
     const [currentLevel, setCurrentLevel] = useState(1);
     const [isGameOver, setIsGameOver] = useState(false);
+    const [highScore, setHighScore] = useState("-");
+
+    const [endingTitle, setEndingTitle] = useState("");
+    const [endingMessage, setEndingMessage] = useState("");
 
     const router = useRouter();
 
@@ -47,7 +51,6 @@ export default function GriddyGame(){
     useEffect(() => {
         setIsTimerDone(false);
         setTimerValue(TIMER_DURATION);
-
         let gridNo = switchCurrentLevel(currentLevel)[0];
         let greenSquareNo = switchCurrentLevel(currentLevel)[1];
         createGrid(gridNo, greenSquareNo);
@@ -113,13 +116,24 @@ export default function GriddyGame(){
 
     // called when answer is right; progress to next level
     const nextLevel = () => {
-        setCurrentLevel(prevLevel => prevLevel + 1);
-        console.log("Proceed to level " + currentLevel);
+        setLocalHighScore(currentLevel);
+        if(currentLevel === 10){
+            setEndingTitle("Congratulations!");
+            setEndingMessage("You completed all 10 levels, that's a superb memory you have!");
+            setIsGameOver(true);
+        }
+        else{
+            setCurrentLevel(prevLevel => prevLevel + 1);
+            console.log("Proceed to level " + currentLevel);
+        }
     };
 
     // called when answer is wrong; game over
     const gameOver = () => {
-        console.log("Game over!");
+        setLocalHighScore(currentLevel-1);
+        setHighScore(getLocalHighScore());
+        setEndingTitle("Game Over!");
+        setEndingMessage("Try Again?");
         setIsGameOver(true);
     };
 
@@ -140,15 +154,21 @@ export default function GriddyGame(){
         {isGameOver ? (
             <div className="flex flex-col bg-gradient-to-b from-sky-400 to-cyan-100 text-black justify-center items-center text-center h-screen p-32">
                 <div className="rounded-3xl px-14 py-7 text-8xl font-bold p-10">
-                    <p>Game Over!</p>
+                    {endingTitle}
                 </div>
+                <p className="w-1/3 transition-opacity ease-in delay-100 duration-1000 text-2xl p-3 text-center justify-between rounded-2xl">
+                    Your current level: <b>{currentLevel - 1}</b>
+                </p>
+                <p className="w-1/3 transition-opacity ease-in delay-100 duration-1000 text-2xl p-3 text-center justify-between rounded-2xl">
+                    Your highest level: <b>{highScore}</b>
+                </p>
                 <p className="transition ease-in-out delay-10rounded-xl text-3xl text-black px-10 py-5 mt-10">
-                    Try again?
+                    {endingMessage}
                 </p>
                 <div className="flex md:flex-row md:gap-20 flex-col gap-3 items-center p-10">
                     <button onClick={()=> retryButtonClicked()}>
                         <p className="transition ease-in-out delay-10 bg-orange-400 w-64 shadow-xl hover:bg-orange-500 hover:scale-110 duration-300 rounded-xl text-3xl text-black px-10 py-5 mt-10">
-                            Retry
+                            Play Again
                         </p>
                     </button>	
                     <button onClick={()=> homeButtonClicked()}>
@@ -157,8 +177,8 @@ export default function GriddyGame(){
                         </p>
                     </button>	
                 </div>
-                
             </div>
+
         ) : (
             
             <div className="flex flex-col bg-gradient-to-b from-sky-400 to-cyan-100 text-black items-center h-full p-32">
@@ -206,7 +226,7 @@ export default function GriddyGame(){
                 }
 
                 {isTimerDone &&
-                    <button onClick={() => checkAnswer()} className="bg-orange-400 hover:bg-orange-500 font-bold text-black py-5 px-20 mt-10 text-3xl rounded-full">
+                    <button onClick={() => checkAnswer()} className="bg-orange-400 hover:bg-orange-500 font-bold text-black py-5 px-20 mt-10 text-3xl rounded-2xl">
                         Submit
                     </button>
                 }

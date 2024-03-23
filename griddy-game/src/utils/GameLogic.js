@@ -100,3 +100,22 @@ export function switchCurrentLevel(currentLevel){
 
     return [gridNo, greenSquareNo];
 }
+
+export function setLocalHighScore(highScore) {
+    let prevHighScore = getLocalHighScore();
+    if(prevHighScore!== "-" && highScore > prevHighScore){
+        localStorage.setItem("griddy-game", JSON.stringify({"highScore" : highScore}));
+    }
+}
+
+// get Local Storage Profile
+export function getLocalHighScore() {
+	try {
+		let data = JSON.parse(
+			localStorage.getItem("griddy-game")
+		);
+		return data["highScore"] || "-";
+	} catch (error) {
+		return "-";
+	}
+}
