@@ -1,36 +1,29 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Griddy Game
+Griddy Game is a memory web game created with Next.js framework and React. 
 
-## Getting Started
+## About
+In this game, players will have to memorise a sequence of grid patterns within a countdown of 5 seconds. After the countdown, the green squares will vanish, and players need to click on the squares where the green ones were located. There are 10 levels in total.
 
-First, run the development server:
+You can play the game by visiting this [link](https://griddy-web-game-app.vercel.app/). 
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Prerequisites
+This project uses Node v21.6.1.
+
+## Setup
+To get started, `cd` to your desired directory and clone this repository using git or download source code as a zip archive.
+```
+git clone https://github.com/elseti/Griddy-Web-Game
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Once downloaded, Next, `cd` into `Griddy-Web-Game/griddy-game` and install the required dependencies using:
+```
+npm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Start the web app using:
+```
+npm run dev
+```
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+The app should now be running at http://localhost:3000. Have fun!
