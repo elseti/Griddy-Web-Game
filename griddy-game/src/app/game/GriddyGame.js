@@ -161,10 +161,10 @@ export default function GriddyGame(){
                 <div className="rounded-3xl px-14 py-7 text-5xl lg:text-7xl font-bold p-10 mt-10">
                     {endingTitle}
                 </div>
-                <p className="w-1/3 transition-opacity ease-in delay-100 duration-1000 text-xl p-3 text-center justify-between rounded-2xl">
+                <p className="lg:w-1/3 transition-opacity ease-in delay-100 duration-1000 text-xl p-3 text-center justify-between rounded-2xl">
                     Your current level: {currentLevel === 10 ? (<b>10</b>) : (<b>{currentLevel - 1}</b>)}
                 </p>
-                <p className="w-1/3 transition-opacity ease-in delay-100 duration-1000 text-xl p-3 text-center justify-between rounded-2xl">
+                <p className="lgw-1/3 transition-opacity ease-in delay-100 duration-1000 text-xl p-3 text-center justify-between rounded-2xl">
                     Your highest level: <b>{highScore}</b>
                 </p>
                 <p className="transition ease-in-out delay-10 rounded-xl text-3xl px-10 py-5 mt-10">
