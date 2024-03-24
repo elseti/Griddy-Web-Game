@@ -186,7 +186,7 @@ export default function GriddyGame(){
 
         ) : (
             
-            <div className={`${pageLoaded ? "opacity-100" : "opacity-0"} transition-opacity ease-in delay-100 duration-1000 text-slate-900 flex flex-col bg-gradient-to-b from-sky-500 to-teal-200 text-black items-center h-full p-16`}>
+            <div className={`${pageLoaded ? "opacity-100" : "opacity-0"} transition-opacity ease-in delay-100 duration-1000 text-slate-900 flex flex-col bg-gradient-to-b from-sky-500 to-teal-200 text-black items-center h-screen lg:h-full p-16`}>
                 <div className="bg-cyan-200 rounded-xl px-14 text-3xl font-bold p-4 shadow-xl">
                     <p>Level {currentLevel}</p>
                 </div>
