@@ -13,7 +13,7 @@ export default function GriddyGame(){
     const [inputArray, setInputArray] = useState([]);
     const [isTimerDone, setIsTimerDone] = useState(false);
     const [timerValue, setTimerValue] = useState(TIMER_DURATION);
-    const [currentLevel, setCurrentLevel] = useState(9);
+    const [currentLevel, setCurrentLevel] = useState(1);
     const [isGameOver, setIsGameOver] = useState(false);
     const [highScore, setHighScore] = useState("-");
 

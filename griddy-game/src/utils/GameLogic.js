@@ -32,61 +32,51 @@ export function switchCurrentLevel(currentLevel){
 
     switch(currentLevel){
         case(1):
-            // console.log('in level 1');
             gridNo = 3;
             greenSquareNo = 3;
             break;
 
         case(2):
-            // console.log('in level 2');
             gridNo = 3;
             greenSquareNo = 4;
             break;
         
         case(3):
-            // console.log('in level 3');
             gridNo = 4;
             greenSquareNo = 4;
             break;
 
         case(4):
-            // console.log('in level 4');
             gridNo = 4;
             greenSquareNo = 5;
             break;
 
         case(5):
-            // console.log('in level 5');
             gridNo = 4;
             greenSquareNo = 6;
             break;
 
         case(6):
-            // console.log('in level 6');
             gridNo = 5;
             greenSquareNo = 5;
             break;
 
         case(7):
-            // console.log('in level 7');
             gridNo = 5;
             greenSquareNo = 6;
             break;
 
         case(8):
-            // console.log('in level 8');
             gridNo = 5;
             greenSquareNo = 7;
             break;
         
         case(9):
-            // console.log('in level 9');
             gridNo = 6;
             greenSquareNo = 6;
             break;
 
         case(10):
-            // console.log('in level 10');
             gridNo = 7;
             greenSquareNo = 7;
             break;
@@ -135,7 +125,6 @@ export function getSessionIsMusicPlaying() {
 		);
 		return data["isMusicPlaying"] || false;
 	} catch (error) {
-		// console.log(error);
         return false;
 	}
 }
